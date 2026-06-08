@@ -11,50 +11,55 @@
 
 ## Descrição da Solução
 
-O **SpaceAlert API** é uma solução desenvolvida para a Global Solution 2026/1 com o tema **economia espacial**.
+O **SpaceAlert API** é uma solução desenvolvida para a Global Solution 2026/1, cujo tema é a economia espacial.
 
-A proposta do projeto é utilizar o conceito de monitoramento por satélite para registrar regiões monitoradas e alertas ambientais/climáticos. A aplicação permite cadastrar regiões, registrar alertas associados a essas regiões e consultar as informações persistidas em banco de dados.
+A proposta do projeto é utilizar o conceito de monitoramento por satélite para registrar regiões monitoradas e alertas ambientais ou climáticos. A aplicação permite cadastrar regiões, registrar alertas associados a essas regiões e consultar as informações persistidas em banco de dados.
 
-A solução foi pensada para apoiar cenários como:
+A solução está relacionada ao uso de dados e infraestrutura espacial para resolver problemas reais na Terra, como prevenção de desastres, monitoramento ambiental e acompanhamento de áreas de risco.
 
-* monitoramento de queimadas;
-* acompanhamento de áreas de risco;
-* alertas climáticos;
-* análise de regiões monitoradas por satélite;
-* apoio à tomada de decisão em situações ambientais críticas.
+---
+
+## Objetivo da Entrega de DevOps
+
+A entrega de DevOps Tools & Cloud Computing tem como objetivo conteinerizar uma aplicação Java utilizando Docker e Docker Compose, criando um ambiente em nuvem com dois containers integrados:
+
+* um container para a aplicação Java Spring Boot;
+* um container para o banco de dados PostgreSQL.
+
+A aplicação foi executada em uma máquina virtual Ubuntu na Azure.
 
 ---
 
 ## Tecnologias Utilizadas
 
-| Tecnologia      | Finalidade                            |
-| --------------- | ------------------------------------- |
-| Java 17         | Linguagem da aplicação                |
-| Spring Boot     | Framework para construção da API REST |
-| Spring Web      | Criação dos endpoints REST            |
-| Spring Data JPA | Persistência dos dados                |
-| PostgreSQL      | Banco de dados relacional             |
-| Docker          | Conteinerização da aplicação          |
-| Docker Compose  | Orquestração dos containers           |
-| Azure VM        | Ambiente em nuvem                     |
-| GitHub          | Versionamento e entrega do código     |
+| Tecnologia      | Finalidade                  |
+| --------------- | --------------------------- |
+| Java 17         | Linguagem da aplicação      |
+| Spring Boot     | Framework da API REST       |
+| Spring Web      | Criação dos endpoints       |
+| Spring Data JPA | Persistência dos dados      |
+| PostgreSQL      | Banco de dados relacional   |
+| Docker          | Conteinerização             |
+| Docker Compose  | Orquestração dos containers |
+| Azure VM        | Ambiente em nuvem           |
+| GitHub          | Versionamento e entrega     |
 
 ---
 
 ## Arquitetura da Solução
 
-A aplicação foi executada em uma máquina virtual Linux na Azure, utilizando dois containers Docker integrados na mesma rede.
+A solução foi executada em uma VM Linux na Azure, com dois containers Docker na mesma rede.
 
 ### Componentes
 
 | Componente      | Descrição                                                |
 | --------------- | -------------------------------------------------------- |
-| Usuário         | Acessa a API pela internet                               |
+| Usuário         | Acessa a API via navegador ou terminal                   |
 | Azure VM        | Máquina virtual Ubuntu onde os containers são executados |
 | Container App   | Executa a API Java Spring Boot                           |
 | Container Banco | Executa o PostgreSQL                                     |
-| Volume Docker   | Mantém os dados persistidos do banco                     |
 | Rede Docker     | Permite a comunicação entre App e Banco                  |
+| Volume Docker   | Mantém os dados persistidos do PostgreSQL                |
 
 ### Fluxo da Arquitetura
 
@@ -63,17 +68,29 @@ Usuário
   |
   | HTTP - Porta 8080
   v
-Azure VM
+Azure VM - Ubuntu
   |
   v
-Container App - app-rm571402
+Container da Aplicação - app-rm556612
   |
   | JDBC
   v
-Container Banco - db-rm571402
+Container do Banco - db-rm556612
   |
   v
 Volume Nomeado - spacealert_data
+```
+
+---
+
+## Desenho Macro da Arquitetura
+
+> Inserir aqui a imagem da arquitetura macro criada no Draw.io ou ferramenta similar.
+
+Exemplo de fluxo esperado no desenho:
+
+```text
+Usuário → Internet → Azure VM → Container App → Docker Network → Container PostgreSQL → Volume Docker
 ```
 
 ---
@@ -82,10 +99,10 @@ Volume Nomeado - spacealert_data
 
 A solução possui duas tabelas principais:
 
-| Tabela  | Descrição                                   |
-| ------- | ------------------------------------------- |
-| regioes | Armazena as regiões monitoradas             |
-| alertas | Armazena os alertas relacionados às regiões |
+| Tabela  | Descrição                                |
+| ------- | ---------------------------------------- |
+| regioes | Armazena regiões monitoradas             |
+| alertas | Armazena alertas relacionados às regiões |
 
 ### Relacionamento
 
@@ -106,8 +123,14 @@ spacealert-devops-gs/
 │       ├── java/
 │       │   └── br/com/fiap/spacealert/
 │       │       ├── controller/
+│       │       │   ├── AlertaController.java
+│       │       │   └── RegiaoController.java
 │       │       ├── model/
+│       │       │   ├── Alerta.java
+│       │       │   └── Regiao.java
 │       │       ├── repository/
+│       │       │   ├── AlertaRepository.java
+│       │       │   └── RegiaoRepository.java
 │       │       └── SpacealertApplication.java
 │       └── resources/
 │           └── application.properties
@@ -125,8 +148,8 @@ spacealert-devops-gs/
 
 | Container    | Função               | Porta |
 | ------------ | -------------------- | ----- |
-| app-rm571402 | API Java Spring Boot | 8080  |
-| db-rm571402  | Banco PostgreSQL     | 5432  |
+| app-rm556612 | API Java Spring Boot | 8080  |
+| db-rm556612  | Banco PostgreSQL     | 5432  |
 
 ---
 
@@ -136,7 +159,7 @@ spacealert-devops-gs/
 
 | Variável    | Valor                                         |
 | ----------- | --------------------------------------------- |
-| DB_URL      | jdbc:postgresql://db-rm571402:5432/spacealert |
+| DB_URL      | jdbc:postgresql://db-rm556612:5432/spacealert |
 | DB_USERNAME | postgres                                      |
 | DB_PASSWORD | postgres                                      |
 | SERVER_PORT | 8080                                          |
@@ -153,7 +176,7 @@ spacealert-devops-gs/
 
 ## Volume Nomeado
 
-O banco de dados utiliza um volume nomeado para garantir a persistência dos dados.
+O banco de dados utiliza um volume nomeado para persistência dos dados.
 
 ```text
 spacealert_data:/var/lib/postgresql/data
@@ -165,7 +188,7 @@ spacealert_data:/var/lib/postgresql/data
 
 Para executar o projeto em nuvem, é necessário ter:
 
-* uma VM Linux Ubuntu criada na Azure;
+* VM Linux Ubuntu criada na Azure;
 * acesso SSH à VM;
 * Docker instalado na VM;
 * Docker Compose instalado na VM;
@@ -278,11 +301,12 @@ pom.xml
 mvnw
 mvnw.cmd
 src
+README.md
 ```
 
 ---
 
-## 10. Subir os containers
+## 10. Subir os containers em background
 
 ```bash
 docker-compose up -d --build
@@ -308,8 +332,8 @@ docker ps
 Resultado esperado:
 
 ```text
-app-rm571402
-db-rm571402
+app-rm556612
+db-rm556612
 ```
 
 ---
@@ -449,7 +473,7 @@ curl http://localhost:8080/alertas
 ## Logs da aplicação
 
 ```bash
-docker logs app-rm571402
+docker logs app-rm556612
 ```
 
 Nesse log é possível verificar:
@@ -465,7 +489,7 @@ Nesse log é possível verificar:
 ## Logs do banco
 
 ```bash
-docker logs db-rm571402
+docker logs db-rm556612
 ```
 
 Nesse log é possível verificar:
@@ -481,7 +505,7 @@ Nesse log é possível verificar:
 ## Container da Aplicação
 
 ```bash
-docker container exec -it app-rm571402 sh
+docker container exec -it app-rm556612 sh
 ```
 
 Dentro do container:
@@ -508,7 +532,7 @@ O usuário `spaceuser` demonstra que a aplicação não está sendo executada co
 ## Container do Banco de Dados
 
 ```bash
-docker container exec -it -u postgres db-rm571402 sh
+docker container exec -it -u postgres db-rm556612 sh
 ```
 
 Dentro do container:
@@ -533,7 +557,7 @@ postgres
 Para acessar diretamente o PostgreSQL dentro do container do banco:
 
 ```bash
-docker container exec -it db-rm571402 psql -U postgres -d spacealert
+docker container exec -it db-rm556612 psql -U postgres -d spacealert
 ```
 
 ---
@@ -577,8 +601,8 @@ SELECT * FROM alertas;
 Resultado esperado:
 
 ```text
-id | descricao                                             | nivel   | titulo                       | regiao_id
-1  | Temperatura elevada detectada por satelite na regiao   | CRITICO | Risco critico de queimadas   | 1
+id | descricao                                           | nivel   | titulo                     | regiao_id
+1  | Temperatura elevada detectada por satelite na regiao | CRITICO | Risco critico de queimadas | 1
 ```
 
 ---
@@ -661,30 +685,34 @@ docker network ls
 
 ---
 
-# Observações sobre a Entrega
+# Checklist de Requisitos Atendidos
 
-A entrega atende aos principais requisitos técnicos da disciplina de DevOps Tools & Cloud Computing:
-
-* aplicação conteinerizada com imagem personalizada;
-* uso de Dockerfile;
-* uso de Docker Compose;
-* dois containers integrados;
-* container da aplicação;
-* container do banco de dados;
-* banco PostgreSQL;
-* volume nomeado para persistência;
-* variáveis de ambiente nos containers;
-* portas expostas;
-* containers executando em segundo plano;
-* container da aplicação com usuário não-root;
-* diretório de trabalho definido no Dockerfile;
-* CRUD completo;
-* duas tabelas com relacionamento;
-* execução em ambiente de nuvem;
-* logs dos containers;
-* acesso aos containers com `docker container exec`;
-* demonstração de `pwd`, `ls -l` e `whoami`;
-* evidência de persistência com `SELECT` direto no banco.
+| Requisito                                 | Status   |
+| ----------------------------------------- | -------- |
+| Aplicação conteinerizada                  | Atendido |
+| Imagem personalizada via Dockerfile       | Atendido |
+| Docker Compose                            | Atendido |
+| Dois containers integrados                | Atendido |
+| Container da aplicação                    | Atendido |
+| Container do banco de dados               | Atendido |
+| Banco PostgreSQL                          | Atendido |
+| Volume nomeado para persistência          | Atendido |
+| Variável de ambiente no App               | Atendido |
+| Variável de ambiente no Banco             | Atendido |
+| Porta exposta no App                      | Atendido |
+| Porta exposta no Banco                    | Atendido |
+| Containers com RM no nome                 | Atendido |
+| App com usuário não-root                  | Atendido |
+| Diretório de trabalho no Dockerfile       | Atendido |
+| CRUD completo                             | Atendido |
+| Duas tabelas relacionadas                 | Atendido |
+| Execução em nuvem                         | Atendido |
+| Containers em background                  | Atendido |
+| Logs dos dois containers                  | Atendido |
+| docker container exec nos dois containers | Atendido |
+| pwd, ls -l e whoami nos dois containers   | Atendido |
+| SELECT direto no banco                    | Atendido |
+| How To desde o clone do repositório       | Atendido |
 
 ---
 
