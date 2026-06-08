@@ -1,7 +1,7 @@
 services:
-  db-rm571402:
+  db-rm556612:
     image: postgres:16
-    container_name: db-rm571402
+    container_name: db-rm556612
     environment:
       POSTGRES_DB: spacealert
       POSTGRES_USER: postgres
@@ -13,18 +13,18 @@ services:
     networks:
       - spacealert_network
 
-  app-rm571402:
+  app-rm556612:
     build: .
-    container_name: app-rm571402
+    container_name: app-rm556612
     environment:
-      DB_URL: jdbc:postgresql://db-rm571402:5432/spacealert
+      DB_URL: jdbc:postgresql://db-rm556612:5432/spacealert
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
       SERVER_PORT: 8080
     ports:
       - "8080:8080"
     depends_on:
-      - db-rm571402
+      - db-rm556612
     networks:
       - spacealert_network
 
