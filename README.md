@@ -85,13 +85,9 @@ Volume Nomeado - spacealert_data
 
 ## Desenho Macro da Arquitetura
 
-> Inserir aqui a imagem da arquitetura macro criada no Draw.io ou ferramenta similar.
+A imagem abaixo representa a arquitetura macro da solução executada em nuvem, utilizando uma VM Ubuntu na Azure com dois containers Docker integrados: aplicação Java Spring Boot e banco PostgreSQL.
 
-Exemplo de fluxo esperado no desenho:
-
-```text
-Usuário → Internet → Azure VM → Container App → Docker Network → Container PostgreSQL → Volume Docker
-```
+![Arquitetura Macro - SpaceAlert](https://github.com/user-attachments/assets/3c634db3-448a-4389-962d-930729dd252e)
 
 ---
 
