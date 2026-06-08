@@ -681,37 +681,6 @@ docker network ls
 
 ---
 
-# Checklist de Requisitos Atendidos
-
-| Requisito                                 | Status   |
-| ----------------------------------------- | -------- |
-| Aplicação conteinerizada                  | Atendido |
-| Imagem personalizada via Dockerfile       | Atendido |
-| Docker Compose                            | Atendido |
-| Dois containers integrados                | Atendido |
-| Container da aplicação                    | Atendido |
-| Container do banco de dados               | Atendido |
-| Banco PostgreSQL                          | Atendido |
-| Volume nomeado para persistência          | Atendido |
-| Variável de ambiente no App               | Atendido |
-| Variável de ambiente no Banco             | Atendido |
-| Porta exposta no App                      | Atendido |
-| Porta exposta no Banco                    | Atendido |
-| Containers com RM no nome                 | Atendido |
-| App com usuário não-root                  | Atendido |
-| Diretório de trabalho no Dockerfile       | Atendido |
-| CRUD completo                             | Atendido |
-| Duas tabelas relacionadas                 | Atendido |
-| Execução em nuvem                         | Atendido |
-| Containers em background                  | Atendido |
-| Logs dos dois containers                  | Atendido |
-| docker container exec nos dois containers | Atendido |
-| pwd, ls -l e whoami nos dois containers   | Atendido |
-| SELECT direto no banco                    | Atendido |
-| How To desde o clone do repositório       | Atendido |
-
----
-
 # Link do Repositório
 
 ```text
