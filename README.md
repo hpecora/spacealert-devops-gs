@@ -87,7 +87,8 @@ Volume Nomeado - spacealert_data
 
 A imagem abaixo representa a arquitetura macro da solução executada em nuvem, utilizando uma VM Ubuntu na Azure com dois containers Docker integrados: aplicação Java Spring Boot e banco PostgreSQL.
 
-![Arquitetura Macro - SpaceAlert](https://github.com/user-attachments/assets/3c634db3-448a-4389-962d-930729dd252e)
+![Arquitetura Macro - SpaceAlert](docs/arquitetura-spacealert.drawio.png)
+
 
 ---
 
