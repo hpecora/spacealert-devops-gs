@@ -692,5 +692,5 @@ https://github.com/hpecora/spacealert-devops-gs
 # Link do Vídeo
 
 ```text
-Adicionar aqui o link do vídeo publicado no YouTube
+https://youtu.be/fs-Ds2N3ANc?si=akQO-vmuvU8F5rrp
 ```
